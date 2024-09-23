@@ -41,9 +41,65 @@ app.use("/system",(req,res)=>{
 
 
 
-app.use("/",(req,res)=>{
-    res.send("Inside the default route")
-})
+// app.use("/",(req,res)=>{
+//     res.send("Inside the default route")
+// })
+
+
+app.use("/anand",
+    [(req,res,next)=>{
+    console.log('Inside First route handler')
+    
+    next();
+   
+  },
+
+(req,res,next)=>{
+    console.log('Inside the second route handler')
+    next();
+    
+},
+
+(req,res,next)=>{
+    console.log('Inside the Third route handler')
+    next();
+    
+},
+
+(req,res,next)=>{
+    console.log('Inside the Fourth route handler')
+    next()
+    
+},
+
+(req,res,next)=>{
+   
+    //next();
+    console.log('Inside the Fifth route handler')
+    res.send("fifth")
+},]
+
+)
+/*OUTPUT
+console 
+inside first
+First
+
+infinte loop
+second 
+
+inside first
+first
+inside second
+Error in the console we are passing response for the two times for one request
+
+second
+error
+
+
+
+*/
+
 
 
 
