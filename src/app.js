@@ -1,106 +1,28 @@
-
-
 const express=require('express');
 
 const app=express();
+app.use(express.json());
 
-let data={
-    name:"Anand",
-    email:"anandkr7808@gmail.com"
-}
+const {adminAuth,userAuth}=require("./middleware/auth")
 
-app.post("/data",(req,res)=>{
-    res.status(200).json({
-        data
-    })
-    console.log("data savrd ")
-    
+app.use("/admin",adminAuth);
+
+
+app.get("/admin/getData",(req,res)=>{
+    res.send("Data sent successfully");
 })
 
-app.patch("/data",(req,res)=>{
-    console.log("Inside path");
-    res.send("inside the patch")
-    
-})
-app.get("/profile",(req,res)=>{
-    res.send(data)
-    console.log("data received successulyy")
-})
-app.use("/hello",(req,res)=>{
-    res.send("Hello world") 
-});
-
-app.use("/test",(req,res)=>{
-    res.send("Testing of the  ect")
-});
-
-
-app.use("/system",(req,res)=>{
-    res.send("system check")
+app.get("/admin/deleteData",(req,res)=>{
+    res.send("data deleted successfully");
 })
 
+app.use("/user/data",userAuth,(req,res)=>{
+    res.send("user data sent successfully")
+})
 
-
-// app.use("/",(req,res)=>{
-//     res.send("Inside the default route")
-// })
-
-
-app.use("/anand",
-    [(req,res,next)=>{
-    console.log('Inside First route handler')
-    
-    next();
-   
-  },
-
-(req,res,next)=>{
-    console.log('Inside the second route handler')
-    next();
-    
-},
-
-(req,res,next)=>{
-    console.log('Inside the Third route handler')
-    next();
-    
-},
-
-(req,res,next)=>{
-    console.log('Inside the Fourth route handler')
-    next()
-    
-},
-
-(req,res,next)=>{
-   
-    //next();
-    console.log('Inside the Fifth route handler')
-    res.send("fifth")
-},]
-
-)
-/*OUTPUT
-console 
-inside first
-First
-
-infinte loop
-second 
-
-inside first
-first
-inside second
-Error in the console we are passing response for the two times for one request
-
-second
-error
-
-
-
-*/
-
-
+app.use("/user/login",(req,res)=>{
+    res.send("login successfull");
+})
 
 
 const PORT=7777;
