@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const url="mongodb+srv://namasteydev:DiCtTuzqTDUfZj3g@namasteynode.c776d.mongodb.net/devPeople"
 
 const dbConnect = async () => {
