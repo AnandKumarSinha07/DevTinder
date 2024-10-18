@@ -1,28 +1,35 @@
-const adminAuth=(req,res,next)=>{
-    const token="xyz";
-    const verified_token="xez";
+const User = require("../models/user");
+const jwt=require('jsonwebtoken')
 
-    if(token===verified_token){
+
+
+const userAuth=async(req,res,next)=>{
+      
+    
+     try {
+        const {token} = req.cookies;
+        console.log("Token",token)
+        if(!token){
+          throw new Error("Token is not valid");
+        }
+  
+        const decodeId = await jwt.verify(token,"DEV@Tinder$790");
+  
+        const {_id} = decodeId;
+        console.log(_id);
+  
+        const user=await User.findById(_id);
+        if(!user){
+          throw new Error("User id not found");
+        }
+  
+        req.user=user;
         next();
-    }
-    else{
-        res.send("u are not authorized to visit the page");
-    }
+        
+     } catch (error) {
+        console.log("INSIDE AUTH API",error);
+        res.status(404).send("Error")
+     }
 }
 
-const userAuth=(req,res,next)=>{
-    const userToke="anc";
-    const checkToken="afnc";
-
-    if(userToke==checkToken){
-        next();
-    }
-    else{
-        res.send("simply not authorized to get the data");
-    }
-}
-
-module.exports={
-    adminAuth,
-    userAuth
-}
+module.exports={userAuth}
