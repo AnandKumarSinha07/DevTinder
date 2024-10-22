@@ -6,13 +6,15 @@ const validationFunction = async (req,res) => {
   
     const { firstName, LastName, email, password } = req.body;
   
+    const errors=[]; 
     if (!firstName || !LastName || !email || !password) {
         throw new Error("All fields are required");
     }
   
     const EmailCheck = validator.isEmail(email);
     if (!EmailCheck) {
-        throw new Error("Email Format is Not valid");
+       throw new Error("Invalid Email")
+       //return res.status(400).send("Invalid email format");
     }
     const firstNameCheck = validator.isAlpha(firstName);
     if (!firstNameCheck) {

@@ -12,12 +12,13 @@ app.use(cookieParser());
 app.use("/",authrouter)
 app.use("/",ProfileRouter)
 
+const PORT=7777;
 dbConnect()
   .then(() => {
     console.log("conedcted to the database");
 
-    app.listen(7777, () => {
-      console.log(`Server is running on port `);
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT} `);
     });
   })
   .catch((error) => {
