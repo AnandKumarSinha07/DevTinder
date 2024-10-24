@@ -1,6 +1,13 @@
 const express=require('express')
 
-const RequestRouter=express.Router();
+const requestRouter=express.Router();
+
+requestRouter.post("/request/send/interested",(req,res)=>{
+
+})
 
 
-module.exports=RequestRouter;
+
+
+
+module.exports=requestRouter;
