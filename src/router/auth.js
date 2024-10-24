@@ -15,7 +15,7 @@ authrouter.post("/login",async(req,res)=>{
       
 
       const findEmail=await User.findOne({email:email});
-      console.log("Data",findEmail)
+      
       
       if(!findEmail){
         return res.status(401).send("Invalid Credentials");
@@ -23,7 +23,7 @@ authrouter.post("/login",async(req,res)=>{
 
       const PasswordCompare=await bcrypt.compare(password,findEmail.password);
       const userId=findEmail._id;
-      console.log("User id is ",userId);
+     
       if(!PasswordCompare){
         return res.status(401).send("Invalid Credentials");
       }else{
@@ -40,6 +40,7 @@ authrouter.post("/login",async(req,res)=>{
 authrouter.post("/signup",async(req,res)=>{
     try{
       validationFunction(req);
+      
       
       const {firstName,LastName,email,password}=req.body;
      

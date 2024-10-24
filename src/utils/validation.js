@@ -4,16 +4,16 @@ const SignUpValidation = (req) => {
     const { firstName, LastName, email, password } = req.body;
 
     if (!firstName || !LastName || !email || !password) {
-        throw new Error("please enter details")
+        return res.status(400).json({message:"Enter The Required Field"})
     }
 
     if (!validator.isEmail(email)) {
-        throw new Error("email is not found")
+        return res.status(400).json({message:"Invalid Email"})
     }
 
    
     if (!validator.isStrongPassword(password)) {
-        throw new Error("password is not strong")
+       return res.status(400).json({message:"Weak Password"})
     }
     
 }

@@ -4,13 +4,15 @@ const dbConnect = require("./config/database");
 const cookieParser = require("cookie-parser");
 
 const authrouter=require('../src/router/auth')
-const ProfileRouter=require('../src/router/profile')
+const ProfileRouter=require('../src/router/profile');
+const requestRouter = require("./router/request");
 
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/",authrouter)
-app.use("/",ProfileRouter)
+app.use("/",authrouter);
+app.use("/",ProfileRouter);
+app.use("/",requestRouter);
 
 const PORT=7777;
 dbConnect()

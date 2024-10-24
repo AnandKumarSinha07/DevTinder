@@ -6,27 +6,26 @@ const validationFunction = async (req,res) => {
   
     const { firstName, LastName, email, password } = req.body;
   
-    const errors=[]; 
+   
     if (!firstName || !LastName || !email || !password) {
-        throw new Error("All fields are required");
+      return res.json({message:"Fill The Reauired Field"})
     }
   
     const EmailCheck = validator.isEmail(email);
     if (!EmailCheck) {
-       throw new Error("Invalid Email")
-       //return res.status(400).send("Invalid email format");
+      return res.json({message:"Invalid Email Format"})
     }
     const firstNameCheck = validator.isAlpha(firstName);
     if (!firstNameCheck) {
-        throw new Error("First name must contain letters only");
+      return res.json({message:"Enter String*"})
     }
     const LastNameCheck = validator.isAlpha(LastName);
     if (!LastNameCheck) {
-       throw new Error("Last name must contain letters only");
+      return res.json({message:"Enter String*"})
     }
     const passwordCheck = validator.isStrongPassword(password);
     if (!passwordCheck) {
-      throw new Error("Weak password");
+       res.send("weak password")
     }
   };
   

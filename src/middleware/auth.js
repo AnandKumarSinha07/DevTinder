@@ -8,7 +8,7 @@ const userAuth=async(req,res,next)=>{
      
      const {token} = req.cookies;
      
-     console.log("Token",token)
+     
      if(!token){
        throw new Error("Token is not valid");
      }
@@ -16,7 +16,7 @@ const userAuth=async(req,res,next)=>{
      const decodeId = await jwt.verify(token,"anand123@");
 
      const {_id} = decodeId;
-     console.log(_id);
+     
 
      const user=await User.findById(_id);
      if(!user){
@@ -28,6 +28,7 @@ const userAuth=async(req,res,next)=>{
      
   } catch (error) {
      console.log("INSIDE AUTH API",error);
+     res.status(404).send("Invalid Credentials")
      
   }
 };
