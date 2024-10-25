@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const authrouter=require('../src/router/auth')
 const ProfileRouter=require('../src/router/profile');
 const requestRouter = require("./router/request");
+const userRouter = require("./router/user");
 
 app.use(express.json());
 app.use(cookieParser());
@@ -13,6 +14,7 @@ app.use(cookieParser());
 app.use("/",authrouter);
 app.use("/",ProfileRouter);
 app.use("/",requestRouter);
+app.use("/",userRouter)
 
 const PORT=7777;
 dbConnect()

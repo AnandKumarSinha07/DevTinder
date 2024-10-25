@@ -8,6 +8,7 @@ const requestSchema=new mongoose.Schema
     fromUserId:{
         type:mongoose.Schema.Types.ObjectId,
         required:true,
+        ref:"User"
     },
     toUserId:{
         type:mongoose.Schema.Types.ObjectId,

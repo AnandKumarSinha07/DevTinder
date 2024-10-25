@@ -12,4 +12,9 @@
 -schema pre function
 
 
+-- POST /request/review/:status/:requestId ==> If the receiver is interested accept the request or reject it
+-- GET /user/requests/received ==> To get all the pending request 
+
+
+
 

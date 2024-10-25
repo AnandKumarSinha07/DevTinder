@@ -61,6 +61,47 @@ requestRouter.post("/request/:status/:touserID",userAuth,async(req,res)=>{
 
 })
 
+requestRouter.post("/request/review/:status/:requestId",userAuth,async(req,res)=>{
+    try{
+        // fromuserId=anand
+        // loged in user =saurabh
+        // status always be interested 
+        // this we have to find in the requestModel so on the basis of that we are going to accept it
+
+        const senderId=req.params.requestId;
+        const logedinUser=req.user;
+        const status=req.params.status;
+        
+        const validStatus=["accepted","rejected"];
+        if(!validStatus.includes(status)){
+            return res.status(400).json({message:"Invalid status type"})
+        }
+
+        const reviewStatusInDb=await requestModel.findOne({
+            status:"interested",
+            fromUserId:senderId,
+            toUserId:logedinUser._id,
+        })
+        if(!reviewStatusInDb){
+            return res.status(404).json({message:"Invalid Request From User"})
+        }
+
+
+        const data=await reviewStatusInDb.save();
+        reviewStatusInDb.status=status;
+
+        return res.status(200).json({
+            message:logedinUser.firstName+status+" your request" ,
+            data
+        })
+        
+
+    }catch(err){
+        console.log("Error in the request review api ",err);
+        res.status(404).send("Bad request");
+        
+    }
+})
 
 
 
