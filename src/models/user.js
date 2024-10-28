@@ -64,6 +64,8 @@ const userSchema=new mongoose.Schema({
         type:String,
         default:"This is xyz profile",
         trim:true,
+        max:40,
+        
     },
 
 

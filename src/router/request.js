@@ -5,11 +5,11 @@ const User=require('../models/user')
 const userAuth = require('../middleware/auth');
 
 
-requestRouter.post("/request/:status/:touserID",userAuth,async(req,res)=>{
+requestRouter.post("/request/:status/:touserID",userAuth,async(req,res)=>{``
     
    try{
     const toUserId=req.params.touserID;
-    console.log("to user id is",toUserId);
+    
    
     const findTouserId=await User.findById(toUserId);
     if(!findTouserId){
@@ -18,7 +18,7 @@ requestRouter.post("/request/:status/:touserID",userAuth,async(req,res)=>{
 
     
     const fromUserId=req.user._id;
-    console.log("from user id is ",fromUserId);
+    
 
    
     const status=req.params.status;
@@ -31,7 +31,7 @@ requestRouter.post("/request/:status/:touserID",userAuth,async(req,res)=>{
     const checkConnectionIndb=await requestModel.findOne({
         $or:
         [
-          { toUserId,fromUserId},
+          {fromUserId,toUserId,},
           {toUserId:fromUserId,fromUserId:toUserId}  
         ] 
     })
@@ -63,14 +63,12 @@ requestRouter.post("/request/:status/:touserID",userAuth,async(req,res)=>{
 
 requestRouter.post("/request/review/:status/:requestId",userAuth,async(req,res)=>{
     try{
-        // fromuserId=anand
-        // loged in user =saurabh
-        // status always be interested 
-        // this we have to find in the requestModel so on the basis of that we are going to accept it
-
+   
         const senderId=req.params.requestId;
         const logedinUser=req.user;
         const status=req.params.status;
+        
+
         
         const validStatus=["accepted","rejected"];
         if(!validStatus.includes(status)){
@@ -87,11 +85,13 @@ requestRouter.post("/request/review/:status/:requestId",userAuth,async(req,res)=
         }
 
 
-        const data=await reviewStatusInDb.save();
         reviewStatusInDb.status=status;
 
+        const data=await reviewStatusInDb.save();
+       
+
         return res.status(200).json({
-            message:logedinUser.firstName+status+" your request" ,
+            message:logedinUser.firstName+" "+status+" your request",
             data
         })
         

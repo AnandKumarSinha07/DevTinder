@@ -27,7 +27,7 @@ authrouter.post("/login",async(req,res)=>{
       if(!PasswordCompare){
         return res.status(401).send("Invalid Credentials");
       }else{
-         const token=await jwt.sign({_id:userId},"anand123@",{expiresIn:"1d"});
+         const token= jwt.sign({_id:userId},"anand123@",{expiresIn:"1d"});
          res.cookie("token",token);
       }
       res.status(200).send("Login successfull ")

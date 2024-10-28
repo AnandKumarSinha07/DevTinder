@@ -14,6 +14,11 @@
 
 -- POST /request/review/:status/:requestId ==> If the receiver is interested accept the request or reject it
 -- GET /user/requests/received ==> To get all the pending request 
+-- check the url is valid or not
+-- about lenght is proper or not
+-- skill should be 10
+-- Forget password  api homework
+
 
 
 
