@@ -21,5 +21,17 @@
 
 
 
+--Feed Api
+
+--user should see all the card except
+  -his own card
+  -his connection
+  -ignored people
+  -already send the connection request
+
+  -Explore the $ nin, $ne $and , $or
+  -pagination
+
+
 
 
