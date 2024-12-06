@@ -38,6 +38,12 @@ first authentication of user we can check if the user is valid or not
 after that if user is valid we are going to take out firstname last name 
 
 
+--POST API VS GET API THOUGHT PROCESS
+--read about ref and populate
+--craete a get api for all the request/user/received
+--all check
+
+
 
 
 

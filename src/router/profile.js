@@ -11,7 +11,7 @@ ProfileRouter.get("/profile/view",userAuth, async (req, res) => {
       const user=req.user;
       res.status(200).send(user);
     }catch(err){
-      console.log("Error inside the Profile Api",err);
+      console.log("Error inside the Profile view Api",err);
       res.status(404).send("Not Found");
     }
 });
@@ -20,24 +20,23 @@ ProfileRouter.patch("/profile/edit",userAuth,async(req,res)=>{
 
    try{
         if(!profileEditValidation(req)){
-          return res.status(400).json({message:"You are not allowed to edit the above field"})
+          return res.status(400).json({message:"Not authorized to edit the above field"})
         }
 
-        const data=req.body;
-       
-        const logedInuser=req.user;
-        console.log(logedInuser);
         
+        const logedInuser=req.user;
 
         Object.keys(req.body).forEach((key)=>logedInuser[key]=req.body[key]);
-        console.log(logedInuser);
 
         await logedInuser.save();
 
-        res.status(200).json({message:logedInuser.firstName+" your profile updated successfully"});
+        res.status(200).json({
+          message:logedInuser.firstName+"profile updated successfully",
+          data:logedInuser,       
+        });
    }catch(err){
-    console.log("Error in the profile edit",err);
-    res.status(400).send("Bad Request");
+    console.error("Error in the profile edit API:", err.message);
+    res.status(500).json({ message: "Internal Server Error" });
    }
 
 })

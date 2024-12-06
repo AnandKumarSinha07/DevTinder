@@ -10,7 +10,7 @@ const userAuth=async(req,res,next)=>{
      
      
      if(!token){
-       throw new Error("Token is not valid");
+       return res.status(401).send("Please Login in!!")
      }
 
      const decodeId = await jwt.verify(token,"anand123@");
