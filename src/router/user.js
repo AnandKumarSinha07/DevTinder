@@ -10,7 +10,7 @@ const USER_SAVE_DATA = [
   "LastName",
   "age",
   "gender",
-  " profile",
+  "profile",
   "about",
   "skill",
 ];
@@ -97,10 +97,10 @@ userRouter.get('/user/feed',userAuth,async(req,res)=>{
 
       const user=await User.find({
           $and:[{_id:{$nin:Array.from(hideUserFeed)}},{_id:{$ne:logedInuser}}] 
-      }).select(USER_SAVE_DATA).skip(skip).limit(limit);
+      }).select(USER_SAVE_DATA).skip(skip).limit(limit).populate('profile');
 
     res.status(200).json({
-      message:"User Feed Information ",
+      message:"User Feed Information of the user",
       user
     })
 

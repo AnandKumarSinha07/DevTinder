@@ -2,14 +2,13 @@ const validator = require("validator");
 
 const validationFunction = async (req, res) => {
   const { firstName, LastName, email, password,profile } = req.body;
-
-  
   
   
   const EmailCheck = validator.isEmail(email);
   if (!EmailCheck) {
     return res.json({ message: "Invalid Email Format" });
   }
+
   const firstNameCheck = validator.isAlpha(firstName);
   if (!firstNameCheck) {
     return res.json({ message: "Enter String" });
@@ -35,6 +34,7 @@ const profileEditValidation = (req) => {
     "gender",
   ];
 
+  
   const isAllowed = Object.keys(req.body).every((field) =>
     AllowedField.includes(field)
   );
