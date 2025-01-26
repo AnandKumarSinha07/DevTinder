@@ -4,6 +4,8 @@ const dbConnect = require("./config/database");
 const cookieParser = require("cookie-parser");
 const cors=require('cors')
 
+require('dotenv').config()
+
 const authrouter=require('../src/router/auth')
 const ProfileRouter=require('../src/router/profile');
 const userRouter = require("./router/user");
@@ -23,7 +25,7 @@ app.use('/',requestRouter)
 
 
 
-const PORT=7777;
+const PORT=process.env.PORT;
 dbConnect()
   .then(() => {
     console.log("conedcted to the database");

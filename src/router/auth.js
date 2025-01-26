@@ -58,7 +58,7 @@ authrouter.post("/signup",async(req,res)=>{
       const {_id}=saveduser;
       console.log("saved user id is ",_id)
 
-      const token= await jwt.sign({_id:saveduser._id},"anand123@",{expiresIn:"1d"});
+      const token= await jwt.sign({_id:saveduser._id},process.env.JWT_SECRET,{expiresIn:"1d"});
       res.cookie("token",token,{
           expires:new Date(Date.now()+8*3600000)
       });
