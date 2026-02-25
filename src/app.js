@@ -22,7 +22,7 @@ app.use(cookieParser());
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://your-frontend-name.vercel.app"
+     "https://dev-tinder-f3r51rila-anands-projects-a96d357b.vercel.app"
   ],
   credentials: true
 }));
