@@ -19,8 +19,13 @@ const initializeSocket = require("./utils/socket");
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(cors())
-
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://devtinderinterface.netlify.app"
+  ],
+  credentials: true
+}));
 
 app.use("/",authrouter);
 app.use('/',chatRotuter);
