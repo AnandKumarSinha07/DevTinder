@@ -28,8 +28,11 @@ authrouter.post("/login",async(req,res)=>{
       }else{
          const token= await jwt.sign({_id:userId},"anand123@",{expiresIn:"1d"});
          res.cookie("token",token,{
-             expires:new Date(Date.now()+8*3600000)
-         });
+           httpOnly:true,
+           secure:true,
+           sameSite:true,
+           maxAge:24*60*60*100 
+        });
       }
       res.status(200).send(findEmail)
   }catch(err){
@@ -60,7 +63,10 @@ authrouter.post("/signup",async(req,res)=>{
 
       const token= await jwt.sign({_id:saveduser._id},process.env.JWT_SECRET,{expiresIn:"1d"});
       res.cookie("token",token,{
-          expires:new Date(Date.now()+8*3600000)
+         httpOnly:true,
+         secure:true,
+         sameSite:true,
+         maxAge:24*60*60*100 
       });
 
       res.status(200).json({
