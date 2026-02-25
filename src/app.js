@@ -19,13 +19,8 @@ const initializeSocket = require("./utils/socket");
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(cors({
-  origin: [
-    "http://localhost:5173",
-     "https://dev-tinder-f3r51rila-anands-projects-a96d357b.vercel.app"
-  ],
-  credentials: true
-}));
+
+app.use(cors());
 
 
 app.use("/",authrouter);

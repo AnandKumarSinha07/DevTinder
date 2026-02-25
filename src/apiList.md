@@ -49,3 +49,11 @@ after that if user is valid we are going to take out firstname last name
 
 
 
+
+// app.use(cors({
+//   origin: [
+//     "http://localhost:5173",
+//      "https://dev-tinder-f3r51rila-anands-projects-a96d357b.vercel.app"
+//   ],
+//   credentials: true
+// }));
