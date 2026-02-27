@@ -77,7 +77,7 @@ authrouter.post("/signup", async (req, res) => {
 });
 
 authrouter.post("/logout", async (req, res) => {
-  res.cookie("token", null, {
+  res.cookie("token", "", {
     expires: new Date(0),
     httpOnly:true,
     secure:true,
