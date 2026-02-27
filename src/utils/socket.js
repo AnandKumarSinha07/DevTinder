@@ -8,7 +8,9 @@ const initializeSocket=(server)=>{
     const io=socket(server,{
       cors:{
           origin: ["https://devtinderui-ga3q.onrender.com", "http://localhost:5173"],
+          credentials: true
       }
+      transports: ["websocket", "polling"]
     })
     
     io.on("connection",(socket)=>{
