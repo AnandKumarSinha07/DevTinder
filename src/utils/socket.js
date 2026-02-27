@@ -7,7 +7,7 @@ const chat = require('../models/chatModel')
 const initializeSocket=(server)=>{
     const io=socket(server,{
       cors:{
-        origin:"http://localhost:5173",
+          origin: ["https://devtinderui-ga3q.onrender.com", "http://localhost:5173"],
       }
     })
     
